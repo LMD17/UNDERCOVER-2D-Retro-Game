@@ -17,7 +17,7 @@ Follow the instructions below to set up and run the project.
 
 1. Clone the repository:
    ```sh
-   git clone https://github.com/your-username/UNDERCOVER-2D-Retro-Game.git
+   git clone https://github.com/LMD17/UNDERCOVER-2D-Retro-Game.git
    cd game
    ```
 
