@@ -54,4 +54,6 @@ You may build upon the program from Question 2, however, ensure that the submiss
 not include elements from Question 3.
 
 
+## License
+This project is licensed under the MIT License - see the LICENSE file for details.
 
