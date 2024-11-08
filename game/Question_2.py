@@ -4,16 +4,20 @@ import random
 import sprite_sheet
 import csv
 
+# initialize pygame
 pygame.init()
 
+# define screen width and height
 SCREEN_WIDTH = 800
 SCREEN_HEIGHT = int(SCREEN_WIDTH * 0.8)
 
+# set display mode
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 
+# set display caption
 pygame.display.set_caption('UNDERCOVER')
 
-# set framerate
+# set frame rate
 clock = pygame.time.Clock()
 FPS = 60
 
@@ -34,7 +38,6 @@ pine1_img = pygame.image.load('game/image/background/pine1.png').convert_alpha()
 pine2_img = pygame.image.load('game/image/background/pine2.png').convert_alpha()
 mountain_img = pygame.image.load('game/image/background/mountain.png').convert_alpha()
 sky_img = pygame.image.load('game/image/background/sky_cloud.png').convert_alpha()
-#!!!!!!!!!! check description for references of assets: https://youtu.be/JTM8_pcQOUU?list=PLjcN1EyupaQm20hlUE11y9y8EY2aXLpnv
 
 # store tiles in a list
 img_list = []
@@ -578,12 +581,6 @@ water_group = pygame.sprite.Group()    # group bullets together
 decoration_group = pygame.sprite.Group()    # group bullets together
 exit_group = pygame.sprite.Group()    # group bullets together
 
-
-
-
-
-
-
     
 movement = None
 
@@ -729,10 +726,7 @@ while run:
                 elif movement == 1:
                     agent.moving_right = True
                     
-
-                    
-
     # take everything that happened in one iteration of the loop and upate the game window with that.
     pygame.display.update()
     
-pygame.quit()
+pygame.quit()   # quit game

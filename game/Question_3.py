@@ -1,31 +1,25 @@
-# *Note that it cant include code from question 2 but it does!!!
-# playlist resource: https://youtube.com/playlist?list=PLjcN1EyupaQm20hlUE11y9y8EY2aXLpnv&si=GmoGMvS3Q0iHKGTt
-# Assets:
-# https://www.youtube.com/redirect?event=video_description&redir_token=QUFFLUhqbVItUmhqR2kwdGZyNTctOHdHUk9oeWxrZWFaZ3xBQ3Jtc0tuOGtodDN3VzNpR3R5ZHJleGx0TUMxLUVId2lVRzUzY3JXcW90N2VueS1rYXpxRkV6cl90QUUyVXFudWtVdUREcnlSazI3S0FfcnJPUzdyMnBVSGpFb19pY1RqejRoMXJTNFoyeGZUS1pMYTd2LTAyYw&q=https%3A%2F%2Fmtk.itch.io%2Fgrenades-16x16&v=1hXAq0Re2xA
-# https://www.youtube.com/redirect?event=video_description&redir_token=QUFFLUhqbG0tdVVSNWpvcGEwVTZxWjNWd0NmaGxEaUotQXxBQ3Jtc0trS0hLaW4xbksxd1h6dzR5MUN0UTRJN0Zmd29NOUtOT0ZuNmJhUU1vUnhTQWZIdG9saHFINHExUmlJMlZOaGt0RjR4d21zcjhDNklQQlJCRlRqTUpxbUg3clF6VEtlaGMzazU5ZXNoZDcwU0NpX1lMYw&q=http%3A%2F%2Fgushh.net%2Fblog%2Ffree-game-sprites-explosion-3%2F&v=1hXAq0Re2xA
-# https://www.youtube.com/redirect?event=video_description&redir_token=QUFFLUhqa3QxTVlBRldZQ0J5aU8zblplSE1ld0UxbXVRd3xBQ3Jtc0tuM0RQeXhGQWFyX1I3cnNLRkFJeEg3Tkx2S2VkZXBIazVnZzFHY0lidlUyS1BJYUxoTldoc0t2a3RuUDVWcERiTkNGdVJWQndtVEhNd0U0UklSYW1WWllvX3c5MDlxOGxFTF9XZmtrMVJZRU5vTTNWZw&q=https%3A%2F%2Ferayzesen.itch.io%2Fpixel-platformer&v=1hXAq0Re2xA
-# https://www.youtube.com/redirect?event=video_description&redir_token=QUFFLUhqbkRpSHItY0pSYXVHLXg5U29CVXNnQk9LQWJTQXxBQ3Jtc0tsM2RpbmI4dGpwSkxqdEVrWWhyR2pTUlRWNHl4NTdjVEpZS2dQbUNObHdGVURVQzRDclRpdXFndTQyanZ6MFZHbWxIWEE1bjcxd2ZzRkxScTU0SE8wRnJGWUV5Uk1xeWZTcHU2R2pMTk9sZVo0dmUyZw&q=https%3A%2F%2Fsecrethideout.itch.io%2Fteam-wars-platformer-battle&v=1hXAq0Re2xA
-# https://www.youtube.com/redirect?event=video_description&redir_token=QUFFLUhqbWhBQ1ZqUUgtWUFzS0lKdlV2LUttZ1lMZGJrd3xBQ3Jtc0ttdXNLUEJSUXR6aW9RWE9iZElkUWdUNG1ZVENHcTZlcTJQdzF3SV85ajdXRHpSdUg3MmFmb3J1Y1ZHa1R3MnBMVTNWa2lic1NUSktrdnAyNE50Q1VERmFBZTJPU2R5ZnllcFlHRkVQWFcxVGN5ekxtWQ&q=https%3A%2F%2Fsoundbible.com%2F1875-Bullet-Whizzing-By.html&v=1hXAq0Re2xA
-# https://www.youtube.com/redirect?event=video_description&redir_token=QUFFLUhqbS1RazlxenB4aExDZWxFdHNaV3cwbm45Z0FTd3xBQ3Jtc0tua0MxdnVuMzFOT0FzOHMwYzdVSzdraHJGVzA0b0dVSGlfMGt5bVFPdFJ3T0tkOGM2OVBDSVljMTBXb3lMMmpvSkkzTThtcTAwYU41UWZvWUVhNTJMc2J5ZTNjSzBQdklMZDZEVEFxcUdYeDZBMnhVTQ&q=https%3A%2F%2Fsoundimage.org%2Ffantasywonder%2F&v=1hXAq0Re2xA
-
-
+# imports
 import pygame
 from pygame import mixer
 import random
 import sprite_sheet
 import csv
 
+# initialize mixer and pygame
 mixer.init()
 pygame.init()
 
+# define screen width and height
 SCREEN_WIDTH = 800
 SCREEN_HEIGHT = int(SCREEN_WIDTH * 0.8)
 
+# set display mode
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 
+# set display caption
 pygame.display.set_caption('UNDERCOVER')
 
-# set framerate
+# set frame rate
 clock = pygame.time.Clock()
 FPS = 60
 
@@ -44,6 +38,7 @@ level = 1
 start_game = False
 start_intro = False
 restart = "none"    # variable to determine if level or game is restarted
+controls = False    
 
 
 # load music and sounds
@@ -733,8 +728,9 @@ decoration_group = pygame.sprite.Group()    # group bullets together
 exit_group = pygame.sprite.Group()    # group bullets together
 
 
-# declare movement variable
+# declare movement and control variables
 movement = None
+
 
 # create empty tile list
 world_data = []
@@ -759,8 +755,18 @@ while run:
     
     clock.tick(FPS)
     
+    # display controls            
+    if controls:
+        pygame.draw.rect(screen, BLACK, (0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)) # cover screen with gold rectangle
+        draw_text(f"CONTROLS", font_extra_big, WHITE, SCREEN_WIDTH//2-275, SCREEN_HEIGHT//2 - 220)
+        draw_text(f"W = jump", font_big, WHITE, SCREEN_WIDTH//2-275, SCREEN_HEIGHT//2 - 170)
+        draw_text(f"D = move right", font_big, WHITE, SCREEN_WIDTH//2-275, SCREEN_HEIGHT//2 - 120)
+        draw_text(f"A = move left", font_big, WHITE, SCREEN_WIDTH//2-275, SCREEN_HEIGHT//2)
+        draw_text(f"R = reload", font_big, WHITE, SCREEN_WIDTH//2-275, SCREEN_HEIGHT//2 + 100)
+        draw_text(f"SPACE = shoot", font_big, WHITE, SCREEN_WIDTH//2-272, SCREEN_HEIGHT//2 + 200)
+
     # game has not started
-    if start_game == False:
+    elif start_game == False:
         # draw menu
         screen.fill(BG) # fill screen
         
@@ -772,7 +778,6 @@ while run:
         draw_text(f"Press 'B' to BEGIN your MISSION", font_big, WHITE, SCREEN_WIDTH//2-320, SCREEN_HEIGHT//2 + 150)
         draw_text(f"Press 'ESC' to exit the game", font_big, WHITE, SCREEN_WIDTH//2-270, SCREEN_HEIGHT//2 + 220)
         
-
     else:   # game has started
         # update background
         draw_bg()   # update background each iteration so that movement doesnt create a trail
@@ -795,6 +800,7 @@ while run:
         
         agent.update() # update agent
         agent.draw()   # draw agent
+        
         
         # for all villains
         for villain in villain_group:
@@ -828,8 +834,6 @@ while run:
                 start_intro = False # if fade is complete start_intro becomes false
                 intro_fade.fade_counter = 0 # reset fade counter so that intro_fade can be run from scratch again if needed
                 
-                
-        
         # update player actions
         if agent.alive:
             if agent.shot:   # shoot bullets
@@ -861,7 +865,7 @@ while run:
                                 world_data[x][y] = int(tile)
                     world = World() # create World
                     agent, health_bar = world.process_data(world_data)  # get agent and healthbar
-            
+             
         elif game_complete: # check if player completed the game
             pygame.draw.rect(screen, GOLD, (0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)) # cover screen with gold rectangle
             if victory_fade.fade():
@@ -871,6 +875,7 @@ while run:
                 draw_text(f"Press 'S' to restart the GAME", font_big, WHITE, SCREEN_WIDTH//2-275, SCREEN_HEIGHT//2)
                 draw_text(f"Press 'ESC' to exit the GAME", font_big, WHITE, SCREEN_WIDTH//2-272, SCREEN_HEIGHT//2 + 100)
                 restart = "game"    # game is completed and if user selects to restart then the game is restarted
+        
         else: # player not alive
             screen_scroll = 0   # when a player dies, reset to 0 (screen_scroll has to do with the players movement)
             if death_fade.fade():   # wait for fade to complete   
@@ -879,15 +884,16 @@ while run:
                 draw_text(f"Press 'ESC' to exit the game", font_big, WHITE, SCREEN_WIDTH//2-275, SCREEN_HEIGHT//2 + 100)
                 restart = "level"   # level is failed and if user selects to restart then the level is restarted
                 
-                    
-    
+               
     for event in pygame.event.get():
         # quit game
         if event.type == pygame.QUIT:
-            run = False
+            run = False # run is now false
             
         # keyboard presses
         if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_c:
+                controls = True # user is selecting to view controls
             if event.key == pygame.K_SPACE:
                 agent.shot = True
                 # Remember what movement user was doing before shot so that movement can continue after shooting
@@ -950,6 +956,8 @@ while run:
                 
         # keyboard button released
         if event.type == pygame.KEYUP:
+            if event.key == pygame.K_c:
+                controls = False    # user is deselecting to view controls
             if event.key == pygame.K_a:
                 agent.moving_left = False
                 movement = None
@@ -971,9 +979,6 @@ while run:
                 elif movement == 1:
                     agent.moving_right = True
                     
-
-                    
-
     # take everything that happened in one iteration of the loop and upate the game window with that.
     pygame.display.update()
     
