@@ -122,7 +122,6 @@ all_agent_brother_images.append(idle_img)
 all_agent_brother_images.append(walk_img) 
 
 
-
 # load pickup boxes
 health_box_img = pygame.image.load('game/image/icons/health_box.png').convert_alpha()
 ammo_box_img = pygame.image.load('game/image/icons/ammo_box.png').convert_alpha()
