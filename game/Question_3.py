@@ -59,13 +59,6 @@ hurt_fx = pygame.mixer.Sound('game/audio/hurt.wav')
 hurt_fx.set_volume(0.5) # reduce volume
 
 
-# load images
-
-# button images
-start_img = pygame.image.load('game/image/start_btn.png').convert_alpha()
-exit_img = pygame.image.load('game/image/exit_btn.png').convert_alpha()
-restart_img = pygame.image.load('game/image/restart_btn.png').convert_alpha()
-
 # load background images
 pine1_img = pygame.image.load('game/image/background/pine1.png').convert_alpha()
 pine2_img = pygame.image.load('game/image/background/pine2.png').convert_alpha()
