@@ -1,4 +1,5 @@
 
+# imports
 import pygame
 from pygame import mixer
 import random
@@ -715,8 +716,6 @@ intro_fade = ScreenFade(1, BLACK, 5)
 death_fade = ScreenFade(2, PINK, 5)
 victory_fade = ScreenFade(3, BLACK, 5)
 
-
-
 # create sprite groups
 agent_brother_group = pygame.sprite.Group()    # group villains together
 villain_group = pygame.sprite.Group()    # group villains together
@@ -726,10 +725,8 @@ water_group = pygame.sprite.Group()    # group bullets together
 decoration_group = pygame.sprite.Group()    # group bullets together
 exit_group = pygame.sprite.Group()    # group bullets together
 
-
 # declare movement and control variables
 movement = None
-
 
 # create empty tile list
 world_data = []
@@ -752,17 +749,18 @@ agent, health_bar = world.process_data(world_data)  # get agent and healthbar
 run = True  
 while run:
     
+    # set clock tick to FPS
     clock.tick(FPS)
     
     # display controls            
     if controls:
         pygame.draw.rect(screen, BLACK, (0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)) # cover screen with gold rectangle
-        draw_text(f"CONTROLS", font_extra_big, WHITE, SCREEN_WIDTH//2-275, SCREEN_HEIGHT//2 - 220)
-        draw_text(f"W = jump", font_big, WHITE, SCREEN_WIDTH//2-275, SCREEN_HEIGHT//2 - 170)
-        draw_text(f"D = move right", font_big, WHITE, SCREEN_WIDTH//2-275, SCREEN_HEIGHT//2 - 120)
-        draw_text(f"A = move left", font_big, WHITE, SCREEN_WIDTH//2-275, SCREEN_HEIGHT//2)
-        draw_text(f"R = reload", font_big, WHITE, SCREEN_WIDTH//2-275, SCREEN_HEIGHT//2 + 100)
-        draw_text(f"SPACE = shoot", font_big, WHITE, SCREEN_WIDTH//2-272, SCREEN_HEIGHT//2 + 200)
+        draw_text(f"CONTROLS", font_extra_big, WHITE, SCREEN_WIDTH//2-150, SCREEN_HEIGHT//2 - 275)
+        draw_text(f"W = jump", font_big, WHITE, SCREEN_WIDTH//2-150, SCREEN_HEIGHT//2 - 175)
+        draw_text(f"D = move right", font_big, WHITE, SCREEN_WIDTH//2-150, SCREEN_HEIGHT//2 - 75)
+        draw_text(f"A = move left", font_big, WHITE, SCREEN_WIDTH//2-150, SCREEN_HEIGHT//2 + 25)
+        draw_text(f"R = reload", font_big, WHITE, SCREEN_WIDTH//2-150, SCREEN_HEIGHT//2 + 125)
+        draw_text(f"SPACE = shoot", font_big, WHITE, SCREEN_WIDTH//2-150, SCREEN_HEIGHT//2 + 225)
 
     # game has not started
     elif start_game == False:
